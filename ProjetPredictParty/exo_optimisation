@@ -1,0 +1,54 @@
+import random
+
+def f_sphere(x):
+
+    return x[0]**2 + x[1]**2
+
+def initialiser_individus():
+    x = [-10, -10]
+    X=[]
+    X.append(x)
+
+    for n in range(20):
+        x=[a+1 for a in x]
+        X.append(x)
+    return X
+
+
+def meilleure_solution(X):
+    min = X[0]
+    for x in X:
+        if f_sphere(x) <= f_sphere(min):
+            min = x
+
+    return min
+
+
+
+def rech_aleatoire():
+    X=initialiser_individus()
+
+    meilleure = meilleure_solution(X)
+
+    while(f_sphere(meilleure) > 0.05):
+        for x in X:
+            a=random.random()
+            if(a>0.5):
+                 x[0] = random.random()*-10.
+            else:
+                x[0]= random.random()*10.
+            a=random.random()
+            if (a > 0.5):
+                x[1] = random.random() * -10.
+            else:
+                x[1] = random.random() * 10.
+
+        meilleure0 = meilleure_solution(X)
+        if(f_sphere(meilleure0)< f_sphere(meilleure)):
+            meilleure=meilleure0
+
+    print(meilleure)
+
+rech_aleatoire()
+
+
